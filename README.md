@@ -2,6 +2,7 @@
 > Getting Started Guide for MongoDB users to deploy Realm on Verizon's 5G Edge zones
 
 The power of the mobile edge compute (MEC) resides in part in its ability to provide local computing with low latency, by having mobile clients use the nearest MEC node to handle application traffic. Most notably, Verizon in partnership with AWS has deployed several of these MEC zones, called the Wavelength zones in the AWS console, that offer all of the well-known AWS resources like EC2, EKS, and ECS to deploy next-generation applications.
+
 In this tutorial, we will go over deploying a the much-adored object storage service Mongo Realm onto the MEC to power apps that desire low-latency storage and response times. The tutorial uses the requisite repositories to deploy the services and instructions on configuring the MongoDB cloud portal accordingly.
 
 
@@ -11,17 +12,19 @@ To complete this exercise, you will need:
 - An AWS account that is opted-in to Wavelength zones. The opt-in can be done from the AWS console instantly and is free-of-cost.
 
 ## Step 1: Create an Atlas Cluster and Realm app in the Mongo Cloud Portal
-From the Mongo cloud console, we will first start with creating an organization. When doing so, ensure that you're choosing Atlas instead of Cloud Manager ([follow this tutorial](https://docs.atlas.mongodb.com/tutorial/manage-organizations/)) option. After the organization is created, create a project in the organization and provide it with requisite perimissions (ex: Project Owner) for your users. Once the project is created, 
-create an Atlas cluster for the cloud database. The cluster is fully managed by Mongo and is currently available in two zones in the AWS free tier: us-east-1 and us-west-2, which are the regions in which AWS Wavelength zones are located as well. Make sure to choose the region based on the VPC where you will create your AWS Wavelength instance 
+From the Mongo cloud console, we will first start with creating an organization. When doing so, ensure that you're choosing Atlas instead of Cloud Manager ([follow this tutorial](https://docs.atlas.mongodb.com/tutorial/manage-organizations/)) option. 
+
+After the organization is created, create a project in the organization and provide it with requisite perimissions (ex: Project Owner) for your users. Once the project is created, create an Atlas cluster for the cloud database. The cluster is fully managed by Mongo and is currently available in two zones in the AWS free tier: us-east-1 and us-west-2, which are the regions in which AWS Wavelength zones are located as well. Make sure to choose the region based on the VPC where you will create your AWS Wavelength instance.
+
 The next step is to create the Realm app on the cloud console by navigating to the Realm tab in your projects - you can keep the default configuration for this exercise. 
 
 <img src="https://github.com/VKonanur/MongoDB-Realm-for-Verizon-5G-Edge/blob/main/Img/Create_Realm.png" width="500" height="400">
 
 Now, navigate to the Realm you have created / using for this execise and turn on Realm Sync, which ensures that the data uploaded is backed up onto the main Atlas database cluster.
 
-<img src="https://github.com/VKonanur/MongoDB-Realm-for-Verizon-5G-Edge/blob/main/Img/Realm_sync.png" width="500" height="400">
+<img src="https://github.com/VKonanur/MongoDB-Realm-for-Verizon-5G-Edge/blob/main/Img/Realm_sync.png" width="600" height="400">
 
-Once the Sync functionality is turned on, the next step is enable API access to the databse. Navigate to the `Data Access' on the left hand pane in the Realm cloud dashboard,go to App Users and add in an API user. This will generate a private key token (store this in a safe place) that will be used in the next step, where the locally deployed Realm on the Wavelength will use it to communicate back to the Realm/Atlas cluster. 
+Once the Sync functionality is turned on, the next step is enable API access to the databse. Navigate to the `Data Access` on the left hand pane in the Realm cloud dashboard, go to App Users and add in an API user. This will generate a private key token (store this in a safe place) that will be used in the next step, where the locally deployed Realm on the Wavelength will use it to communicate back to the Realm/Atlas cluster. Similarly, under `Data Access` go to `Authentication` and turn on API access.
 
 <img src="https://github.com/VKonanur/MongoDB-Realm-for-Verizon-5G-Edge/blob/main/Img/API_access.png" width="400" height="300">
 
@@ -60,11 +63,11 @@ Under the same `Data Access` tab, go to Schema and input the Realm object schema
 ```
 > Realm object schema for this tutorial
 
-Once this step is complete, the cloud portal is configured accordindly for this exercise.
+Once this step is complete, the cloud portal is configured for this exercise.
 
 ## Step 2: Deploy Docker container for Realm DB on the Wavelength zone instance. 
-Once the MongoDB cloud elements have been provisioned and the API key for the Realm app have been created, we are ready to deploy the Realm database via a docker container on the Wavelength zone. 
-The instructions below mirror for a Linux system, however, using the Docker application, it can also be replicated on Windows as well. 
+Once the MongoDB cloud elements have been provisioned and the API key for the Realm app have been created, we are ready to deploy the Realm database via a docker container on the AWS Wavelength zone. For instructions deploying your first AWS Wavelength compute instance, please see this [tutorial](https://aws.amazon.com/blogs/compute/creating-an-ec2-instance-in-the-aws-wavelength-zone/).
+The instructions below are for a Linux system, however, using the Docker application, it can also be replicated on Windows as well. 
 
 ```
 git clone https://github.com/graboskyc/MQTTtoRealm.git &&
@@ -93,7 +96,7 @@ CLIENTID="Realm App ID"
 TOPIC="IOTDataPoint"
 ```
 
-Run `./build.sh` script to start the container. At this point, go to your cloud console, in your project, open up the requisite Realm app and the data points from this producer should've started populating.
+Run `./build.sh` script to start the container. At this point, go to your cloud console, in your project, open up the requisite Realm app and the data points from this producer should start populating.
 
 
 ## Resources
