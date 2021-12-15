@@ -102,4 +102,4 @@ Run `./build.sh` script to start the container. At this point, go to your cloud 
 ## Resources
 To learn more, visit the [5G Edge Documentation](https://www.verizon.com/business/solutions/5g/edge-computing/developer-resources/). Any questions? Reach out to verizon5gedge[at]verizon.com or create an issue on the repository, type a title and description, and provide your error message for reproducibility.
 
-We would like also extend thanks to the MongoDB team, specifically, Chris Grabosky, for their contribution towards this tutorial.
+We would like to extend thanks to the MongoDB team, specifically, Chris Grabosky, for their contribution towards this tutorial.
