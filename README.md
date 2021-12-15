@@ -24,7 +24,7 @@ Now, navigate to the Realm you have created / using for this execise and turn on
 
 <img src="https://github.com/VKonanur/MongoDB-Realm-for-Verizon-5G-Edge/blob/main/Img/Realm_sync.png" width="600" height="400">
 
-Once the Sync functionality is turned on, the next step is enable API access to the databse. Navigate to the `Data Access` on the left hand pane in the Realm cloud dashboard, go to App Users and add in an API user. This will generate a private key token (store this in a safe place) that will be used in the next step, where the locally deployed Realm on the Wavelength will use it to communicate back to the Realm/Atlas cluster. Similarly, under `Data Access` go to `Authentication` and turn on API access.
+Once the Sync functionality is turned on, the next step is enable API access to the database. Navigate to the `Data Access` on the left hand pane in the Realm cloud dashboard, go to App Users and add in an API user. This will generate a private key token (store this in a safe place) that will be used in the next step, where the locally deployed Realm on the Wavelength will use it to communicate back to the Realm/Atlas cluster. Similarly, under `Data Access` go to `Authentication` and turn on API access.
 
 <img src="https://github.com/VKonanur/MongoDB-Realm-for-Verizon-5G-Edge/blob/main/Img/API_access.png" width="400" height="300">
 
@@ -80,7 +80,7 @@ Input the private API key and the Realm App ID that you provisioned in the cloud
 Run `./build.sh` which will start the docker container for you using the above variables. Right now, the a local Realm database is setup on the Wavelength zone, in addition to having a MQTT listener to get data from a producer on Verizon's 5G network. 
 
 ## Step 3: Setup a data producer over a device on the Verizon mobile network. 
-This an MQTT producer that will act as the synthetic data generator to send data to the Realm DB deployed on the Wavelength zone, which inturn will sync information to in the cloud portal and onto the Atlas cluster of choice.
+This an MQTT producer that will act as the synthetic data generator to send data to the Realm DB deployed on the Wavelength zone, which inturn will sync the data to the cloud portal and onto the Atlas cluster of choice.
 The instructions below are for a Linux system, however, similar to the above, however, can be executed over a Windows system on the Docker application. 
 
 ```
@@ -101,3 +101,5 @@ Run `./build.sh` script to start the container. At this point, go to your cloud 
 
 ## Resources
 To learn more, visit the [5G Edge Documentation](https://www.verizon.com/business/solutions/5g/edge-computing/developer-resources/). Any questions? Reach out to verizon5gedge[at]verizon.com or create an issue on the repository, type a title and description, and provide your error message for reproducibility.
+
+We would like also extend thanks to the MongoDB team, specifically, Chris Grabosky, for their contribution towards this tutorial.
