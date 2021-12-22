@@ -81,7 +81,7 @@ Run `./build.sh` which will start the docker container for you using the above v
 
 ## Step 3: Setup a data producer over a device on the Verizon mobile network. 
 This an MQTT producer that will act as the synthetic data generator to send data to the Realm DB deployed on the Wavelength zone, which inturn will sync the data to the cloud portal and onto the Atlas cluster of choice.
-The instructions below are for a Linux system, however, similar to the above, however, can be executed over a Windows system on the Docker application. 
+The instructions below are for a Linux system, however, similar to the above, it can also be executed over a Windows system with a Docker application, and on mobile devices like iOS and Android that have linux emulator apps with docker library installed. 
 
 ```
 git clone https://github.com/graboskyc/MQTTProducer.git && 
